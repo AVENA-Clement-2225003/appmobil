@@ -2,24 +2,33 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <body>
+            <h1>Microsoft To Do</h1>
+            <ul id={"toDoList"}>
+            </ul>
+            <form action={addTask()}>
+                <input type={"text"} placeholder={"Nom de tâche"}/>
+                <input type={"date"} placeholder={"Date"}/>
+                <input type={"submit"} value={"Ajouter"}/>
+            </form>
+            </body>
+        </div>
+    );
+}
+
+function addTask() {
+    let taskName = "oui";
+    let taskDate = "non";
+    let div = document.createElement("div");
+    let pName = document.createElement("p");
+    pName.textContent = taskName;
+    let pDate = document.createElement("p");
+    pDate.textContent = taskDate;
+    div.appendChild(pName);
+    div.appendChild(pDate);
+    document.getElementById("toDoList").appendChild(div);
 }
 
 export default App;
