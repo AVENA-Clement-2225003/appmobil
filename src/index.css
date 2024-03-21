@@ -1,13 +1,86 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: white;
+    background-color: #282c34;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    border-radius: 1em;
+    background-color: cadetblue;
+    padding: 1em;
+}
+
+form > input {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+ul {
+    padding: 0;
+    width: fit-content;
+}
+
+li > form {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    background-color: transparent;
+}
+
+li > form > p {
+    margin-right: 1em;
+}
+
+li {
+    padding: 1em;
+    border: 1px solid black;
+    margin-top: 1em;
+    list-style: none;
+    width: fit-content;
+    background-color: cadetblue;
+    border-radius: 1em;
+}
+
+li > form > input[type='submit'], button {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+button > img {
+    width: 2em;
+}
+
+.Nom {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+.Date {
+    color: lightgrey;
+    width: fit-content;
+    font-style: italic;
+    background-color: transparent;
+    border: none;
+}
+
+.active {
+    background-color: #345557;
+}
+
+.active > form > * {
+    text-decoration: line-through;
 }
