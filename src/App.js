@@ -22,6 +22,12 @@ function App() {
         }
     }
 
+    const updateTask = (taskId, newName, newDate) => {
+        todoListRef.current = todoListRef.current.map(task => task.id === taskId ? { id:task.id, name:newName, date:newDate, done: task.done } : task);
+        localStorage.setItem('todoList', JSON.stringify(todoListRef.current));
+        setDummyState(prevState => prevState + 1); // Trigger rerender
+    };
+
     const addTask = (e) => {
         e.preventDefault();
         const newTask = { name: inputs.current[0].value, date: inputs.current[1].value, id: todoListRef.current.length, done: false };
@@ -52,6 +58,7 @@ function App() {
     return (
         <div className="App">
             <h1>Microsoft To Do</h1>
+            <p>{todoListRef.current.filter(task => task.done === true).length}/{todoListRef.current.length} Tâches effectuées</p>
             <form onSubmit={addTask}>
                 <input type={"submit"} value={"+"} />
                 <input ref={addInput} type={"text"} placeholder={"Nom de tâche"} required />
@@ -59,7 +66,7 @@ function App() {
             </form>
             <ul id={"toDoList"}>
                 {todoListRef.current.map((task, i) => (
-                    <Task key={i} id={task.id} date={task.date} nom={task.name} done={task.done} onDelete={deleteTask} onChecked={doneTask} />
+                    <Task key={i} id={task.id} date={task.date} nom={task.name} done={task.done} onDelete={deleteTask} onChecked={doneTask} onUpdated={updateTask}/>
                 ))}
             </ul>
         </div>
