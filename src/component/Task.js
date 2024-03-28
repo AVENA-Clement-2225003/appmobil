@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import trashImg from '../assets/trash-svgrepo-com.svg';
 import checkImg from '../assets/pen-square-svgrepo-com.svg';
+import Calendar from 'react-calendar'
+import calendarImg from "../assets/calendar-days-svgrepo-com.svg";
 
 class Task extends React.Component{
 
@@ -9,7 +11,17 @@ class Task extends React.Component{
         this.checkTask = this.checkTask.bind(this);
         this.delete = this.delete.bind(this);
         this.update = this.update.bind(this);
+        this.state = {
+            showCalendar: false
+        };
     }
+
+    toggleCalendar = () => {
+        this.setState(prevState => ({
+            showCalendar: !prevState.showCalendar
+        }));
+    };
+
     update = (event) => {
         event.preventDefault();
         const newName = event.target.parentNode.querySelector('.Nom').value;
@@ -28,15 +40,19 @@ class Task extends React.Component{
     }
     render () {
         return (
-            <li id={this.props.id} className={this.props.done ? 'active' : null}>
-                <form onSubmit={this.update}>
-                    <input type={'checkbox'} onClick={this.checkTask} />
-                    <input type={'text'} className="Nom" defaultValue={this.props.nom} />
-                    <input type={'date'} className="Date" defaultValue={this.props.date}/>
-                    <button type="submit"><img src={checkImg} alt="Upadte" /></button>
-                </form>
-                <button onClick={this.delete}><img src={trashImg} alt="Delete" /></button>
-            </li>
+            <>
+                <li id={this.props.id} className={this.props.done ? 'active' : null}>
+                    <form onSubmit={this.update}>
+                        <input type={'checkbox'} onClick={this.checkTask} />
+                        <input type={'text'} className="Nom" defaultValue={this.props.nom} />
+                        <input type={'date'} className="Date" defaultValue={this.props.date}/>
+                        <img className={'CalendarIcon'} src={calendarImg} onClick={this.toggleCalendar}/>
+                        <button type="submit"><img src={checkImg} alt="Update" /></button>
+                    </form>
+                    <button onClick={this.delete}><img src={trashImg} alt="Delete" /></button>
+                </li>
+                {this.state.showCalendar && <Calendar id='Calendar' className={'default'} />}
+            </>
         );
     }
 

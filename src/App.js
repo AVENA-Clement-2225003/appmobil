@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Task from "./component/Task";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
+import calendarImg from './assets/calendar-days-svgrepo-com.svg';
 
 function App() {
     const [dummyState, setDummyState] = useState(0); // Dummy state to trigger rerender
@@ -15,6 +18,12 @@ function App() {
             setDummyState(prevState => prevState + 1); // Trigger rerender
         }
     }, []);
+
+    const [showCalendar, setShowCalendar] = useState(false);
+
+    const toggleCalendar = () => {
+        setShowCalendar(prevState => !prevState);
+    };
 
     const addInput = el => {
         if (el && !inputs.current.includes(el)) {
@@ -63,7 +72,9 @@ function App() {
                 <input type={"submit"} value={"+"} />
                 <input ref={addInput} type={"text"} placeholder={"Nom de tâche"} required />
                 <input ref={addInput} type={"date"} placeholder={"Date"} required />
+                <img className={'CalendarIcon'} src={calendarImg} onClick={toggleCalendar}/>
             </form>
+            {showCalendar && <Calendar id='Calendar' className={'default'} />}
             <ul id={"toDoList"}>
                 {todoListRef.current.map((task, i) => (
                     <Task key={i} id={task.id} date={task.date} nom={task.name} done={task.done} onDelete={deleteTask} onChecked={doneTask} onUpdated={updateTask}/>
