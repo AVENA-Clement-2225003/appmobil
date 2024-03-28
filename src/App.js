@@ -6,10 +6,14 @@ import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import calendarImg from './assets/calendar-days-svgrepo-com.svg';
 
+
 function App() {
     const [dummyState, setDummyState] = useState(0); // Dummy state to trigger rerender
     const todoListRef = useRef([]);
     const inputs = useRef([]);
+
+    const [showCalendar, setShowCalendar] = useState(false);
+    const [calendarValue, setCalendarDate] = useState(new Date());
 
     useEffect(() => {
         const storedTodoList = JSON.parse(localStorage.getItem('todoList'));
@@ -18,8 +22,6 @@ function App() {
             setDummyState(prevState => prevState + 1); // Trigger rerender
         }
     }, []);
-
-    const [showCalendar, setShowCalendar] = useState(false);
 
     const toggleCalendar = () => {
         setShowCalendar(prevState => !prevState);
@@ -71,10 +73,10 @@ function App() {
             <form onSubmit={addTask}>
                 <input type={"submit"} value={"+"} />
                 <input ref={addInput} type={"text"} placeholder={"Nom de tâche"} required />
-                <input ref={addInput} type={"date"} placeholder={"Date"} required />
+                <input ref={addInput} type={"date"} placeholder={"Date"} value={calendarValue.toISOString().substring(0, 10)} onChange={(e) => setCalendarDate(new Date(e.target.value))} required />
                 <img className={'CalendarIcon'} src={calendarImg} onClick={toggleCalendar}/>
             </form>
-            {showCalendar && <Calendar id='Calendar' className={'default'} />}
+            {showCalendar && <Calendar id='Calendar' className={'default'} onChange={setCalendarDate} value={calendarValue}/>}
             <ul id={"toDoList"}>
                 {todoListRef.current.map((task, i) => (
                     <Task key={i} id={task.id} date={task.date} nom={task.name} done={task.done} onDelete={deleteTask} onChecked={doneTask} onUpdated={updateTask}/>

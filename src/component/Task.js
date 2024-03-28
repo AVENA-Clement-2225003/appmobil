@@ -31,9 +31,6 @@ class Task extends React.Component{
     checkTask() {
         this.props.onChecked(this.props.id);
     }
-    /*update() {
-        this.props.onChange(this.props.id, this.props.name, this.props.date, this.props.done);
-    }*/
     delete(e) {
         e.preventDefault();
         this.props.onDelete(this.props.id);
@@ -45,17 +42,16 @@ class Task extends React.Component{
                     <form onSubmit={this.update}>
                         <input type={'checkbox'} onClick={this.checkTask} />
                         <input type={'text'} className="Nom" defaultValue={this.props.nom} />
-                        <input type={'date'} className="Date" defaultValue={this.props.date}/>
+                        <input type={'date'} className="Date" value={this.props.date}/>
                         <img className={'CalendarIcon'} src={calendarImg} onClick={this.toggleCalendar}/>
                         <button type="submit"><img src={checkImg} alt="Update" /></button>
                     </form>
                     <button onClick={this.delete}><img src={trashImg} alt="Delete" /></button>
                 </li>
-                {this.state.showCalendar && <Calendar id='Calendar' className={'default'} />}
+                {this.state.showCalendar && <Calendar id='Calendar' className={'default'} defaultValue={this.props.date}/>}
             </>
         );
     }
-
 }
 
 export default Task;
