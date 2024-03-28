@@ -1,7 +1,6 @@
 import React from 'react';
 import trashImg from '../assets/trash-svgrepo-com.svg';
-import checkImg from '../assets/check-svgrepo-com.svg';
-import calendarImg from '../assets/calendar-days-svgrepo-com.svg';
+import checkImg from '../assets/pen-square-svgrepo-com.svg';
 
 class Task extends React.Component{
 
@@ -33,7 +32,7 @@ class Task extends React.Component{
                 <form onSubmit={this.update}>
                     <input type={'checkbox'} onClick={this.checkTask} />
                     <input type={'text'} className="Nom" defaultValue={this.props.nom} />
-                    <input type={'date'} className="Date" defaultValue={this.props.date}><img src={calendarImg}/></input>
+                    <input type={'date'} className="Date" defaultValue={this.props.date}/>
                     <button type="submit"><img src={checkImg} alt="Upadte" /></button>
                 </form>
                 <button onClick={this.delete}><img src={trashImg} alt="Delete" /></button>

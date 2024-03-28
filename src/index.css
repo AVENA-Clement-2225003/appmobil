@@ -44,6 +44,8 @@ li > form > p {
 }
 
 li {
+    display: flex;
+    flex-direction: row;
     padding: 1em;
     border: 1px solid black;
     margin-top: 1em;
